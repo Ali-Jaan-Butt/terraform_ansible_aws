@@ -1,0 +1,27 @@
+---
+- name: Install BitBrowser on Windows
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Download BitBrowser Zip
+      win_get_url:
+        url: "https://downsoft.bitbrowser.cn/BitBrowser_Global_x64.zip"
+        dest: "C:\\Users\\Administrator\\Downloads\\BitBrowser_Global_x64.zip"
+      register: download_result
+      until: download_result is succeeded
+      retries: 3
+      delay: 10
+
+    - name: Extract BitBrowser Zip
+      win_shell: |
+        Expand-Archive -Path "C:\Users\Administrator\Downloads\BitBrowser_Global_x64.zip" -DestinationPath "C:\Users\Administrator\Downloads\BitBrowser_Global_x64" -Force
+
+    - name: Find BitBrowser Installer
+      win_find:
+        paths: "C:\\Users\\Administrator\\Downloads\\BitBrowser_Global_x64"
+        patterns: "*.exe"
+      register: installer_files
+        
+    - name: Install BitBrowser
+      win_shell: |
+        Start-Process -Wait -FilePath "{{ installer_files.files[0].path }}"

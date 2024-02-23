@@ -1,0 +1,23 @@
+---
+- name: Install Python on Windows EC2 Instance
+  hosts: all
+  gather_facts: no
+
+  vars:
+    PythonVersion: "3.11.4"
+    PythonInstallDir: "C:\\Python{{ PythonVersion.replace('.', '') }}"
+    PythonDownloadUrl: "https://www.python.org/ftp/python/{{ PythonVersion }}/python-{{ PythonVersion }}-amd64.exe"
+    PythonExePath: "$env:TEMP\\python-{{ PythonVersion }}-amd64.exe"
+
+  tasks:
+    - name: Download Python Installer
+      win_shell: |
+        $PythonDownloadUrl = "{{ PythonDownloadUrl }}"
+        $PythonExePath = "{{ PythonExePath }}"
+        Invoke-WebRequest -Uri $PythonDownloadUrl -OutFile $PythonExePath
+
+    - name: Install Python
+      win_shell: |
+        $PythonExePath = "{{ PythonExePath }}"
+        $PythonInstallDir = "{{ PythonInstallDir }}"
+        Start-Process -Wait -FilePath $PythonExePath -ArgumentList "/quiet", "InstallAllUsers=1", "Include_test=0", "PrependPath=1", "TargetDir=$PythonInstallDir"

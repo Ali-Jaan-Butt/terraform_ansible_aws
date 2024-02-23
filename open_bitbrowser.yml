@@ -1,0 +1,9 @@
+---
+- name: Run Bitbrowser
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Run Bitbrowser
+      win_shell: 
+          Start-Process -FilePath "$env:USERPROFILE\Desktop\BitBrowser Global"

@@ -1,0 +1,9 @@
+---
+- name: Install Python on Windows EC2 instance
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Execute the Python script
+      win_shell:
+        cd Desktop/bitbrowser; python bitbrowser.py

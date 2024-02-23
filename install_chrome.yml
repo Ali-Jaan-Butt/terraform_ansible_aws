@@ -1,0 +1,11 @@
+---
+- name: Install Google Chrome on Windows EC2 Instance
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Install Google Chrome
+      win_chocolatey:
+          name: googlechrome
+          state: present # "present" to install and "absent to uninstall
+          ignore_checksums: yes

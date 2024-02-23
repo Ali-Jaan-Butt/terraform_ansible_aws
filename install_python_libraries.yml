@@ -1,0 +1,11 @@
+---
+- name: Install Python Libraries on Windows EC2 Instance
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Install requests
+      win_shell: pip install requests
+    
+    - name: Install selenium
+      win_shell: pip install selenium==4.9.0

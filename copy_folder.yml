@@ -1,0 +1,10 @@
+---
+- name: Copy folder to Windows EC2 Instance
+  hosts: all  # name of the group containing your Windows EC2 instance(s)
+  gather_facts: no
+
+  tasks:
+    - name: Copy the folder
+      win_copy:
+        src: /Users/hassanazhar/Python/bitbrowser  # path to the folder on your local machine
+        dest: 'C:\Users\Administrator\Desktop'  # destination path on the remote Windows machine
