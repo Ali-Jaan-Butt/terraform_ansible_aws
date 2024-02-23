@@ -1,0 +1,10 @@
+'all':
+  'hosts':
+    '3.92.19.127':
+      'ansible_user': 'Administrator'
+      'ansible_password': 'Ha.OOS5XIlwZGoyl(&$HU0OGtJNw.Xd8'
+      'ansible_port': !!int '5986'
+      'ansible_connection': 'winrm'
+      'ansible_winrm_scheme': 'https'
+      'ansible_winrm_server_cert_validation': 'ignore'
+      'ansible_winrm_kerberos_delegation': !!bool 'true'
